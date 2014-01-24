@@ -11,7 +11,7 @@ static int x=0,a[100][100],start=1;
 void main()
 {
 	int n;
-	printf("Please enter the number for the Ulam Spiral:\n");
+	printf("Please enter any number less than 100 for the Ulam Spiral:\n");
 	scanf("%d",&n);
 	spiral(n);
 	int i,j;
