@@ -7,7 +7,7 @@ Version=1.0
 */
 #include <stdio.h>
 void spiral(int p);
-static int x=0,a[10][10],start=1;
+static int x=0,a[100][100],start=1;
 void main()
 {
 	int n;
