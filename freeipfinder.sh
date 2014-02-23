@@ -1,5 +1,6 @@
 <<COMMENT
 DESCRIPTION: This is a program to list all the free ip addresses in your local subnet.
+I have used an array here so that the addresses may be used later for some other purposes.
 USAGE: You can invoke this shell script by using bash or sh. You have to type "bash freeipfinder.sh subnetadress(10.3.8) startaddress endaddress"
 AUTHOR: Kethu Harikishan Reddy
 EMAIL: kishanreddy.kethu@gmail.com
