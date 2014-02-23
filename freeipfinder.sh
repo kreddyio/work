@@ -5,7 +5,7 @@ USAGE: You can invoke this shell script by using bash or sh. You have to type "b
 AUTHOR: Kethu Harikishan Reddy
 EMAIL: kishanreddy.kethu@gmail.com
 COMMENT
-#!/bin/sh
+#!/bin/bash
 subnet=$1
 start=$2
 end=$3
