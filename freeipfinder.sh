@@ -14,7 +14,7 @@ while [ $start -le $end ]
 do
    nmap -sP -v $subnet.$start|grep "down" > /dev/null
 	if [ "$?" -eq 0 ]; then
-	        list[$c]=10.3.8.$start #This is my local subnet address in my hostelroom. Bits-Goa \m/.
+	        list[$c]=$subnet.$start #This is my local subnet address in my hostelroom. Bits-Goa \m/.
 	        c=`expr $c + 1`
 	fi
 start=`expr $start + 1`
