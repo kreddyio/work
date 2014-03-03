@@ -1,5 +1,5 @@
 /*
-DESCRIPTION: This is a program to calculate my GPA in my semester.
+DESCRIPTION: This is a program to calculate my GPA in my semester. Actually, I just did this to get somewhat familiar with structures and operations on them :).
 AUTHOR: Kethu Harikishan Reddy
 EMAIL: kishanreddy.kethu@gmail.com
 */
@@ -18,7 +18,7 @@ void main()
 	scanf("%d",&i);
 	if(i>9)
 	{
-		printf("Error!You can only take 9 courses in a sem.\n");
+		printf("Error!You can only take atmost 9 courses in a sem.\n");// Or atleast in Bits Pilani :P.
 	}
 	else
 	{
