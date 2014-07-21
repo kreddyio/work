@@ -9,7 +9,18 @@ import MySQLdb as ms # Module for MySQL-Python api
 def main():
 	# The following line selects sheet 1 of the given Excel file.
 	# Make sure there's only one sheet in it. Else, it takes first one.
-	book = xlrd.open_workbook(raw_input("Please enter the filename to export.(with extension .xls or .xlsx)"))	# The file to convert.
+	x = raw_input("\nIs everything ready?\n(Type y/n and press enter)\n")
+	if x == 'y' or x =='Y':
+		filename = raw_input("Please Enter the file name to export(with .xlsx or .xls etc.):\n")
+	else:
+		main()
+		return
+	try:
+		book = xlrd.open_workbook(filename,'utf8')	# The file to convert.
+	except Exception, e:
+		print "\n\nThe file with the given name was not found!\n Restarting......\n"
+		main()
+		return
 	sheet = book.sheet_by_index(0)	# The sheet we're working on.
 	# The following line is the one which connects to the running instance of MySQL server.
 	# Change the values accordingly.
@@ -17,23 +28,28 @@ def main():
 	cu = con.cursor()	# The handle for the connection.
 	row_num = sheet.nrows 	# No. of rows in file.
 	col_num = sheet.ncols 	# No. of columns in file.
-	cu.execute("use mdp_test;")
-	cu.execute("drop table users")
-	tab_str = "create table users " # Initial part of string while creating a table.
+	if "xls" in filename:
+		if "xlsx" in filename:
+			name = filename.replace(".xlsx","")
+		else:
+			name = filename.replace(".xlsx","")
+	cu.execute("create database ",+name)
+	cu.execute("use "+name)
+	tab_str = "create table data" # Initial part of string while creating a table.
 	col = [] # List that gets all field names.
 	cols="(" # String that has all field names while using "insert into" statement,
 	fields = "(" # The string used with values of size of input while creating the table.
 	for y in xrange(0,col_num):
 		col.append(str(sheet.cell(0,y).value).replace(" ","").replace("'",""))
 		if y != (col_num - 1):
-			fields = fields + str(col[y])+" character(200)," # Data gets truncated automatically if more than 200 characters.
+			fields = fields + str(col[y])+" varchar(255)," # Data gets truncated automatically if more than 200 characters.
 			cols += str(col[y])+","		
 		else:
-			fields = fields + str(col[y])+" character(200))"
+			fields = fields + str(col[y])+" varchar(255))"
 			cols += str(col[y])+")"
 	# print "Trying ",str(tab_str+fields)
 	cu.execute(str(tab_str+fields))
-	ins_str = "insert into users "+cols+" values (" # Initial part of the insert command.
+	ins_str = "insert into data "+cols+" values (" # Initial part of the insert command.
 	for x in xrange(1,row_num):
 		value = ""
 		print "In row ",x+1
