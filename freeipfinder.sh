@@ -15,16 +15,18 @@ for (( i = 1; i < 4; i++ )); do
 	ip=${ip#*.*}
 done
 subnet=${sub[1]}.${sub[2]}.${sub[3]}
-while [ $start -le $end ]
-do
-   nmap -sP -v $subnet.$start|grep "down" > /dev/null
-	if [ "$?" -eq 0 ]; then
-	        list[$c]=$subnet.$start #This is my local subnet address in my hostelroom. Bits-Goa \m/.
-	        c=`expr $c + 1`
-	fi
-start=`expr $start + 1`
-done
+# while [ $start -le $end ]
+# do
+#    nmap -sP -v $subnet.$start|grep "down" > /dev/null
+# 	if [ "$?" -eq 0 ]; then
+# 	        list[$c]=$subnet.$start #This is my local subnet address in my hostelroom. Bits-Goa \m/.
+# 	        c=`expr $c + 1`
+# 	fi
+# start=`expr $start + 1`
+# done
+# echo "Free ip's in your subnet are:"
+# for (( i = 0; i < c; i++ )); do
+# 	echo ${list[$i]}
+# done
 echo "Free ip's in your subnet are:"
-for (( i = 0; i < c; i++ )); do
-	echo ${list[$i]}
-done
+nmap -sP -v $subnet.$start-$end|grep down|awk '{print $5}'
