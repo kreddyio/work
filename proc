@@ -1,0 +1,4 @@
+#!/bin/bash
+# Gives you information of a pid given to this as argument
+cat /proc/$1/cmdline
+echo ''
